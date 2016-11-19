@@ -18,14 +18,8 @@
 static volatile boolean timer_trigger;
 static boolean led_state;
 
-void setup()
+void init_timer()
 {
-	timer_trigger = false;
-	led_state = HIGH;
-
-	// set pins as outputs
-	pinMode(LED_BUILTIN, OUTPUT);
-
 	noInterrupts(); // stop interrupts
 
 	// set timer1 interrupt at 1Hz
@@ -47,6 +41,19 @@ void setup()
 	TIMSK1 |= (1 << OCIE1A);
 
 	interrupts(); // allow interrupts
+}
+
+void setup()
+{
+	// initialise variables
+	timer_trigger = false;
+	led_state = HIGH;
+
+	// set pins as outputs
+	pinMode(LED_BUILTIN, OUTPUT);
+
+	// initialise the timer module
+	init_timer();
 } // end setup
 
 ISR(TIMER1_COMPA_vect)
