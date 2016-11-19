@@ -16,10 +16,12 @@
 #include <Arduino.h>
 
 static volatile boolean timer_trigger;
+static boolean led_state;
 
 void setup()
 {
 	timer_trigger = false;
+	led_state = HIGH;
 
 	// set pins as outputs
 	pinMode(LED_BUILTIN, OUTPUT);
@@ -61,8 +63,7 @@ void loop()
 	{
 		timer_trigger = false;
 
-		int value = digitalRead(LED_BUILTIN);
-		value ^= 1;
-		digitalWrite(LED_BUILTIN, value);
+		led_state ^= 1;
+		digitalWrite(LED_BUILTIN, led_state);
 	}
 }
