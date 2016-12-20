@@ -66,7 +66,7 @@ ISR(TIMER1_COMPA_vect)
 void loop()
 {
 	// do other things here
-	while(!timer_trigger)
+	if(timer_trigger)
 	{
 		timer_trigger = false;
 
