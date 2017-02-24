@@ -1,9 +1,9 @@
 #ifndef _TIMER_H_
 #define _TIMER_H_
 
-#define TIMER_PERIOD_MS 5
+#include <Arduino.h>
 
-void timer_init();
+void timer_init(uint8_t timeMS);
 bool timer_getTrigger();
 void timer_clearTrigger();
 

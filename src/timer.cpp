@@ -1,11 +1,10 @@
-#include <Arduino.h>
 #include "timer.h"
 
 static volatile bool timer_trigger;
 
-static void calulate_prescaler()
+static void calculate_prescaler(uint8_t timeMS)
 {
-	uint32_t prescaler = (F_CPU / 1000) * TIMER_PERIOD_MS;
+	uint32_t prescaler = (F_CPU / 1000) * timeMS;
 	prescaler = prescaler & (-prescaler);
 
 	switch(prescaler)
@@ -38,13 +37,13 @@ static void calulate_prescaler()
 			break;
 	}
 
-	prescaler = ((F_CPU / (1000 * prescaler)) * TIMER_PERIOD_MS) - 1;
+	prescaler = ((F_CPU / (1000 * prescaler)) * timeMS) - 1;
 
 	// set compare match register for nHz increments
 	OCR1A = (uint16_t)min(prescaler, 65535);
 }
 
-void timer_init()
+void timer_init(uint8_t timeMS)
 {
 	// initialise variables
 	timer_trigger = false;
@@ -56,7 +55,7 @@ void timer_init()
 	TCCR1B = 0; // same for TCCR1B
 	TCNT1  = 0; // initialize counter value to 0
 
-	calulate_prescaler();
+	calculate_prescaler(timeMS);
 
 	// turn on CTC mode
 	TCCR1B |= (1 << WGM12);
