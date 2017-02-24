@@ -1,7 +1,6 @@
 #include <Arduino.h>
+#include "sched_rate.h"
 #include "timer.h"
-
-#define TIMER_PERIOD_MS 5
 
 static bool led_state;
 
@@ -14,7 +13,7 @@ void setup()
 	pinMode(LED_BUILTIN, OUTPUT);
 
 	// initialise the timer module
-	timer_init(TIMER_PERIOD_MS);
+	timer_init(SCHEDULER_PERIOD);
 } // end setup
 
 void loop()
