@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 
-void timer_init(uint8_t timeMS);
+void timer_init(uint16_t timeMS);
 bool timer_getTrigger();
 void timer_clearTrigger();
 

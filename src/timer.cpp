@@ -2,7 +2,7 @@
 
 static volatile bool timer_trigger;
 
-static void calculate_prescaler(uint8_t timeMS)
+static void calculate_prescaler(uint16_t timeMS)
 {
 	uint32_t prescaler = (F_CPU / 1000) * timeMS;
 	prescaler = prescaler & (-prescaler);
@@ -43,7 +43,7 @@ static void calculate_prescaler(uint8_t timeMS)
 	OCR1A = (uint16_t)min(prescaler, 65535);
 }
 
-void timer_init(uint8_t timeMS)
+void timer_init(uint16_t timeMS)
 {
 	// initialise variables
 	timer_trigger = false;
