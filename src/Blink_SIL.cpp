@@ -38,6 +38,8 @@ void loop()
 	trigger = timer_getTrigger();
 	if(trigger)
 	{
+		timer_clearTrigger();
+
 		led_state ^= 1;
 		digitalWrite(LED_BUILTIN, led_state);
 	}
